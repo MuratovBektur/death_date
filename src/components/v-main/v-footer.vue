@@ -10,8 +10,14 @@
 
     <img class="v-footer__rune2" src="@img/rune2.svg" alt="rune2" />
     <img class="v-footer__planet-icon" src="@img/planet.svg" alt="planet" />
+    <div class="v-footer__bottom-text">
+      TERMENI SI CONDITII: ACESTA ESTE UN SERVICIU DE DIVERTISMENT. PRIN
+      FOLOSIREA LUI DECLARATI CA AVETI 18 ANI IMPLINITI,
+    </div>
   </footer>
 </template>
+
+
 
 <style lang="scss">
 .v-footer {
@@ -44,6 +50,19 @@
     right: 33px;
     top: -59px;
   }
+  &__bottom-text {
+    width: 300px;
+    font-size: 12px;
+    line-height: 14px;
+    /* or 129% */
+    margin: 70px auto 0;
+
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: #9d9d9d;
+  }
 }
 @media screen and (max-width: 600px) {
   .v-footer {
@@ -71,6 +90,11 @@
       width: 52px;
       right: 15px;
       bottom: 5px;
+    }
+    &__bottom-text {
+      font-size: 7px;
+      line-height: 9px;
+      margin-top: 20px;
     }
   }
 }

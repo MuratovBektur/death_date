@@ -1,15 +1,27 @@
 <template>
   <section class="v-first-question">
-    <div class="question-box">
-      Боитесь ли вы умереть?
-    </div>
+    <div class="question-box">Боитесь ли вы умереть?</div>
     <div class="v-first-question__btns">
-      <button class="golden-btn">Да</button>
-      <button class="golden-btn">Нет</button>
+      <button class="golden-btn" @click="addAnswer(true)">Да</button>
+      <button class="golden-btn" @click="addAnswer(false)">Нет</button>
     </div>
     <div class="small-text">Вопрос 1-5</div>
   </section>
 </template>
+
+<script>
+import { mapMutations } from "vuex";
+export default {
+  methods: {
+    addAnswer(answer) {
+      this.ADD_ANSWER({ answerId: 1, answer });
+      this.$router.push("/question/2");
+    },
+    ...mapMutations(["ADD_ANSWER"]),
+  },
+};
+</script>
+
 
 <style lang="scss">
 .v-first-question {

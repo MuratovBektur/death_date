@@ -1,13 +1,9 @@
 <template>
   <section class="v-main-section">
     <div class="v-main-section__header">
-      <div class=" small-text">
-        Лучшие астрологи и экстрасенсы Румынии
-      </div>
+      <div class="small-text">Лучшие астрологи и экстрасенсы Румынии</div>
       <div class="grey-line"></div>
-      <div class="v-main-section__accuracy-index">
-        Точность прогноза: 97%
-      </div>
+      <div class="v-main-section__accuracy-index">Точность прогноза: 97%</div>
     </div>
     <div class="v-main-section__avatar">
       <div class="v-main-section__avatar-wrapper">
@@ -64,6 +60,7 @@
     </div>
   </section>
 </template>
+
 
 <style lang="scss">
 a {

@@ -1,10 +1,18 @@
 <template>
   <div id="app">
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
-    <router-view />
+    <vMain />
   </div>
 </template>
+
+<script>
+import vMain from "@c/v-main/index.vue";
+export default {
+  name: "App",
+  components: {
+    vMain,
+  },
+};
+</script>
 
 <style lang="scss">
 // Подключение шрифтов

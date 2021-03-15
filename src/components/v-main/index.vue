@@ -15,19 +15,18 @@
         data-aos-delay="300"
       />
       <vFirstQuestion
+        @change-page="changePage"
+        @add-answer="addAnwser"
         id="first-question"
         class="v-main__first-question"
         data-aos="fade-up"
         data-aos-delay="200"
       />
-      <vFooter class="v-main__footer" data-aos="fade-up" data-aos-delay="200" />
-
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad molestiae
-      itaque expedita consequuntur fugit molestias sit saepe neque dicta illo
-      quasi temporibus dolorum deserunt corrupti reiciendis provident doloremque
-      iure ducimus praesentium esse, eius facilis cum nobis? Praesentium ad
-      dicta, quos veniam voluptas quidem sunt expedita odit neque sed rerum
-      soluta quo facilis similique nulla magni.
+      <vFooter
+        class="v-main__footer"
+        data-aos="fade-down"
+        data-aos-delay="200"
+      />
     </div>
   </div>
 </template>
@@ -48,6 +47,21 @@ export default {
     vFirstQuestion,
     vFooter,
   },
+  data() {
+    return {
+      page: 1,
+      answers: [],
+    };
+  },
+  methods: {
+    changePage(page) {
+      this.page = page;
+    },
+    addAnwser(answer) {
+      this.answers.push(answer);
+      console.log(this.answers);
+    },
+  },
 };
 </script>
 
@@ -66,7 +80,7 @@ export default {
     margin-top: 70px;
   }
   &__first-question {
-    margin-top: 133px;
+    padding-top: 133px;
   }
   &__footer {
     margin-top: 105px;
