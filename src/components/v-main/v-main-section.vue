@@ -36,28 +36,40 @@
       КОГДА ВЫ ПОКИНЕТЕ ЭТОТ МИР И ПРИ КАКИХ ОБСТОЯТЕЛЬСТВАХ?
     </div>
     <div
-      class="v-main-section__btns"
+      class="v-main-section__btns-footer-section"
       data-aos="fade-up"
       data-aos-once
       data-aos-delay="400"
     >
-      <button class="golden-btn">
-        <!-- <button class="golden-btn" style="margin-top:30px"> -->
-        Да
-      </button>
-      <button class="golden-btn">
-        <!-- <button class="golden-btn" style="margin-top:30px"> -->
-        Нет
-      </button>
-    </div>
-    <div class="v-main-section__footer small-text">
-      <!-- <div class="small-text" style="margin-top:30px"> -->
-      <div>Онлайн предсказание</div>
+      <div>
+        <a href="#first-question">
+          <button class="golden-btn">
+            <!-- <button class="golden-btn" style="margin-top:30px"> -->
+            Да
+          </button>
+        </a>
+      </div>
+      <div>
+        <a href="#first-question">
+          <button class="golden-btn">
+            <!-- <button class="golden-btn" style="margin-top:30px"> -->
+            Нет
+          </button>
+        </a>
+      </div>
+      <div class="v-main-section__footer small-text">
+        <!-- <div class="small-text" style="margin-top:30px"> -->
+        <div>Онлайн предсказание</div>
+      </div>
     </div>
   </section>
 </template>
 
 <style lang="scss">
+a {
+  text-decoration: none;
+  color: inherit;
+}
 .v-main-section {
   display: flex;
   flex-direction: column;
@@ -69,7 +81,7 @@
 
   &__header {
     margin-top: 10px;
-    min-height: 60px;
+    min-height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -101,7 +113,7 @@
     position: absolute;
     width: 344px;
   }
-  &__btns > button {
+  &__btns-footer-section > div {
     margin-top: 35px;
   }
   &__avatar-img {
@@ -130,6 +142,7 @@
     &__header {
       font-size: 12px;
       line-height: 14px;
+      min-height: 60px;
     }
 
     &__accuracy-index {
@@ -153,7 +166,7 @@
       left: 32px;
       top: 32px;
     }
-    &__btns > button {
+    &__btns-footer-section > div {
       margin-top: 20px;
     }
     &__blik-img {

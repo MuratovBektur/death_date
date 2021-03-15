@@ -7,6 +7,8 @@
 body {
   background: #202024;
   color: #fff;
+  max-width: 100%;
+  height: auto;
 }
 
 .small-text {
@@ -60,14 +62,19 @@ body {
   }
 }
 
-.golden-btn:nth-child(4n + 2) {
+.golden-btn:nth-child(4n + 1) {
   animation-delay: 0.5s;
 }
-.golden-btn:nth-child(4n + 3) {
+.golden-btn:nth-child(4n + 2) {
   animation-delay: 1s;
 }
-.golden-btn:nth-child(4n + 4) {
+.golden-btn:nth-child(4n + 3) {
   animation-delay: 1.5s;
+}
+.golden-text {
+  font-weight: 500;
+  font-family: Montserrat;
+  color: #f6c866;
 }
 @keyframes bgcolorchange {
   100% {
@@ -91,5 +98,9 @@ body {
   .golden-btn {
     width: 179px;
     height: 40px;
+  }
+  .golden-text {
+    font-size: 20px;
+    line-height: 25px;
   }
 }

@@ -18,6 +18,11 @@ export default {
 // Подключение шрифтов
 @import "./assets/fonts/Roboto/stylesheet.css";
 @import "./assets/fonts/Montserrat/stylesheet.css";
+@import "./assets/fonts/BadScript/stylesheet.css";
 
 @import "./assets/variables.scss";
+#app {
+  overflow: auto;
+  overflow-y: hidden;
+}
 </style>
