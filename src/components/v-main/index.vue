@@ -99,7 +99,7 @@ export default {
       margin-top: 40px;
     }
     &__first-question {
-      margin-top: 53px;
+      padding-top: 53px;
     }
     &__footer {
       margin-top: 61px;
