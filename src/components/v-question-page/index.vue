@@ -60,7 +60,7 @@
                 <div class="v-question-page__select center-btn">
                   <span class="select-wrapper">
                     <select v-model="form.selectedYear">
-                      <option value="*" disabled selected>Месяц</option>
+                      <option value="*" disabled selected>Год</option>
                       <option :value="n" v-for="n in aviableYears" :key="n">{{
                         n
                       }}</option>
@@ -118,7 +118,7 @@ export default {
     return {
       isLoaded: false,
       questionId: null,
-      aviableYears: Array(1200).fill(1),
+      aviableYears: Array(121).fill(1),
       form: {
         selectedDay: "*",
         selectedMonth: "*",
@@ -148,6 +148,10 @@ export default {
         answerId: this.questionPageId,
         answer: answer == null ? this.form : answer,
       });
+      if (this.questionPageId == 4) {
+        this.$router.push("/");
+        return;
+      }
       this.CHANGE_ID(+this.questionPageId + 1);
       this.isLoaded = false;
       this.$router.push("/question/" + this.questionPageId);
@@ -298,12 +302,6 @@ export default {
     }
     & footer {
       margin-top: 0;
-      // position: absolute;
-      // bottom: 20px;
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-      // width: 100vw;
     }
     &__footer-text {
       margin-top: -25px;
