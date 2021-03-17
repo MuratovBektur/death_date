@@ -7,10 +7,16 @@
           data-aos="fade-down"
           data-aos-delay="300"
         >
-          <div class="v-question-page__header-text">
-            Мы расскажем Вам не только подробности вашей смерти, но также
-            поможем Вам избежать этой ужасной даты и продлить вашу жизнь на
-            многие годы.
+          <div
+            :class="[
+              {
+                'v-question-page__header-text-notification':
+                  currentQuestion.isNotification,
+              },
+              'v-question-page__header-text',
+            ]"
+          >
+            {{ currentQuestion.headerTitle }}
           </div>
           <img
             class="v-question-page__eye-icon"
@@ -131,12 +137,16 @@ export default {
     if (isNaN(id) || id < 2 || id > 5) {
       this.$router.replace("/");
     } else {
-      let beginYear = 1900;
-      this.aviableYears = this.aviableYears.map(() => beginYear++);
-      this.CHANGE_ID(2);
+      let beginYear = new Date().getFullYear() - 5;
+      this.aviableYears = this.aviableYears.map(() => beginYear--);
+      this.CHANGE_ID(id);
     }
+    window.onpopstate = () => {
+      this.CHANGE_ID(id);
+      this.isLoaded = true;
+    };
     console.log(id);
-    setTimeout(() => (this.isLoaded = true), 2000);
+    setTimeout(() => (this.isLoaded = true), 500);
   },
   methods: {
     ...mapMutations(["CHANGE_ID", "ADD_ANSWER"]),
@@ -144,6 +154,12 @@ export default {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
     addAnswer(answer) {
+      if (this.questionPageId == 3) {
+        const canSubmit = !Object.values(this.form).some((v) => v === "*");
+        if (!canSubmit) {
+          return;
+        }
+      }
       this.ADD_ANSWER({
         answerId: this.questionPageId,
         answer: answer == null ? this.form : answer,
@@ -162,6 +178,12 @@ export default {
       await this.sleep(2000);
       this.isLoaded = true;
     }
+    window.onpopstate = (e) => {
+      const { id } = this.$route.params;
+      console.log("e", e);
+      this.CHANGE_ID(id);
+      this.isLoaded = true;
+    };
     console.log(this.form);
   },
   computed: {
@@ -217,6 +239,26 @@ export default {
     text-align: center;
 
     opacity: 0.6;
+  }
+  &__header-text-notification {
+    background-color: #fff;
+    color: #202024;
+    padding: 12px 0;
+    opacity: 1;
+    position: relative;
+  }
+  &__header-text-notification::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-color: #fff transparent;
+    border-width: 20px 11px 0;
+    bottom: -20px;
+    left: 90%;
+    margin-left: -11px;
   }
   &__eye-icon {
     position: relative;

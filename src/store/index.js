@@ -30,6 +30,20 @@ const store = new Vuex.Store({
       {
         id: 4,
         type: "button",
+        isNotification: true,
+        headerTitle:
+          "Смерть родного человека – одно из тяжелейших испытаний в жизни каждого из нас!",
+        question: "Снятся ли Вам умершие люди?",
+        answerOptions: [
+          { id: 1, value: "Да" },
+          { id: 2, value: "Нет" },
+          { id: 3, value: "Иногда" },
+        ],
+      },
+      {
+        id: 5,
+        type: "button",
+        isNotification: true,
         headerTitle:
           "Смерть родного человека – одно из тяжелейших испытаний в жизни каждого из нас!",
         question: "Снятся ли Вам умершие люди?",
