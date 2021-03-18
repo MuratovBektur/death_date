@@ -16,7 +16,11 @@
               'v-question-page__header-text',
             ]"
           >
-            {{ currentQuestion.headerTitle }}
+            {{
+              currentQuestion.id === 5
+                ? getTitleByAge
+                : currentQuestion.headerTitle
+            }}
           </div>
           <img
             class="v-question-page__eye-icon"
@@ -32,7 +36,6 @@
             <div class="v-question-page__btns">
               <template v-if="currentQuestion.type === 'button'">
                 <button
-                  class="golden-btn"
                   v-for="answer in currentQuestion.answerOptions"
                   :key="answer.id"
                   @click="addAnswer(answer.id)"
@@ -57,9 +60,12 @@
                   <span class="select-wrapper">
                     <select v-model="form.selectedMonth">
                       <option value="*" disabled selected>Месяц</option>
-                      <option :value="n" v-for="n in 12" :key="n">{{
-                        n
-                      }}</option>
+                      <option
+                        :value="idx"
+                        v-for="(month, idx) in aviableMonth"
+                        :key="month"
+                        >{{ month }}</option
+                      >
                     </select>
                   </span>
                 </div>
@@ -73,7 +79,13 @@
                     </select>
                   </span>
                 </div>
-                <button class="golden-btn" @click="addAnswer(null)">
+                <div
+                  v-show="notification"
+                  class="v-question-page__error-notification"
+                >
+                  Заполните все данные
+                </div>
+                <button @click="addAnswer(null)">
                   Далее
                 </button>
               </template>
@@ -125,28 +137,44 @@ export default {
       isLoaded: false,
       questionId: null,
       aviableYears: Array(121).fill(1),
+      aviableMonth: [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Ноябрь",
+        "Декабрь",
+      ],
       form: {
         selectedDay: "*",
         selectedMonth: "*",
         selectedYear: "*",
       },
+      notification: false,
     };
   },
   mounted() {
-    const { id } = this.$route.params;
-    if (isNaN(id) || id < 2 || id > 5) {
-      this.$router.replace("/");
-    } else {
-      let beginYear = new Date().getFullYear() - 5;
-      this.aviableYears = this.aviableYears.map(() => beginYear--);
-      this.CHANGE_ID(id);
-    }
-    window.onpopstate = () => {
-      this.CHANGE_ID(id);
+    // const { id } = this.$route.params;
+    // if (isNaN(id) || id < 2 || id > 5) {
+    //   this.$router.replace("/");
+    // } else {
+    let beginYear = new Date().getFullYear() - 5;
+    this.aviableYears = this.aviableYears.map(() => beginYear--);
+    this.CHANGE_ID(this.questionPageId);
+    // }
+
+    console.log(this.questionPageId);
+    setTimeout(() => {
       this.isLoaded = true;
-    };
-    console.log(id);
-    setTimeout(() => (this.isLoaded = true), 500);
+      if (this.currentQuestion == undefined) {
+        this.$router.replace("/");
+      }
+    }, 500);
   },
   methods: {
     ...mapMutations(["CHANGE_ID", "ADD_ANSWER"]),
@@ -157,20 +185,21 @@ export default {
       if (this.questionPageId == 3) {
         const canSubmit = !Object.values(this.form).some((v) => v === "*");
         if (!canSubmit) {
+          this.notification = true;
           return;
         }
       }
       this.ADD_ANSWER({
-        answerId: this.questionPageId,
+        id: +this.questionPageId,
         answer: answer == null ? this.form : answer,
       });
-      if (this.questionPageId == 4) {
-        this.$router.push("/");
+      if (this.questionPageId == 5) {
+        this.$router.push("/collect-info/");
         return;
       }
       this.CHANGE_ID(+this.questionPageId + 1);
       this.isLoaded = false;
-      this.$router.push("/question/" + this.questionPageId);
+      // this.$router.push("/question/" + this.questionPageId);
     },
   },
   async updated() {
@@ -178,16 +207,16 @@ export default {
       await this.sleep(2000);
       this.isLoaded = true;
     }
-    window.onpopstate = (e) => {
-      const { id } = this.$route.params;
-      console.log("e", e);
-      this.CHANGE_ID(id);
-      this.isLoaded = true;
-    };
+    // window.onpopstate = (e) => {
+    //   const { id } = this.$route.params;
+    //   console.log("e", e);
+    //   this.CHANGE_ID(id);
+    //   this.isLoaded = true;
+    // };
     console.log(this.form);
   },
   computed: {
-    ...mapGetters(["currentQuestion"]),
+    ...mapGetters(["currentQuestion", "getTitleByAge"]),
     ...mapState(["questionPageId"]),
   },
   watch: {
@@ -195,9 +224,6 @@ export default {
       console.log(val);
     },
   },
-  // methods:{
-  //   store.getters.getTodoById(2);
-  // }
 };
 </script>
 
@@ -289,6 +315,12 @@ export default {
     right: 250px;
     height: 89px;
   }
+  &__error-notification {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
   & footer {
     margin: 35px 0 20px;
   }
@@ -342,11 +374,20 @@ export default {
       object-fit: cover;
       object-position: 100%;
     }
+    &__error-notification {
+      font-size: 14px;
+    }
     & footer {
       margin-top: 0;
     }
     &__footer-text {
       margin-top: -25px;
+    }
+
+    &__header-text-notification::after {
+      border-width: 11px 5px 0;
+      bottom: -11px;
+      margin-left: -5px;
     }
   }
 }

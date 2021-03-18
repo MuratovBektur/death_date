@@ -14,11 +14,12 @@ import { mapMutations } from "vuex";
 export default {
   methods: {
     addAnswer(answer) {
-      this.ADD_ANSWER({ answerId: 1, answer });
+      this.ADD_ANSWER({ id: 1, answer });
+      this.CHANGE_ID(2);
 
-      this.$router.push("/question/2");
+      this.$router.push("/question/");
     },
-    ...mapMutations(["ADD_ANSWER"]),
+    ...mapMutations(["ADD_ANSWER", "CHANGE_ID"]),
   },
 };
 </script>
