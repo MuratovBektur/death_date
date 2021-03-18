@@ -59,7 +59,6 @@ export default {
     },
     addAnwser(answer) {
       this.answers.push(answer);
-      console.log(this.answers);
     },
   },
 };

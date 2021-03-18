@@ -213,16 +213,10 @@ export default {
     //   this.CHANGE_ID(id);
     //   this.isLoaded = true;
     // };
-    console.log(this.form);
   },
   computed: {
     ...mapGetters(["currentQuestion", "getTitleByAge"]),
     ...mapState(["questionPageId"]),
-  },
-  watch: {
-    form(val) {
-      console.log(val);
-    },
   },
 };
 </script>

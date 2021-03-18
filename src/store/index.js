@@ -60,15 +60,9 @@ const store = new Vuex.Store({
       const foundAnswer = state.answers.find(
         (answer) => answer.id == newAnswer.id
       );
-      console.log("found", foundAnswer);
       if (foundAnswer) {
         state.answers = state.answers.filter(
           (answer) => answer.id != newAnswer.id
-        );
-        console.log("newState", state.answers);
-        console.log(
-          "filtered",
-          state.answers.filter((answer) => answer.id == newAnswer.id)
         );
       }
       state.answers = [...state.answers, newAnswer];
